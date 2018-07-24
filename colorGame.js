@@ -11,11 +11,8 @@ var reset = document.querySelector("#reset");
 var easyBtn = document.querySelector("#easyBtn");
 var hardBtn = document.querySelector("#hardBtn");
 var messageDisplay = document.querySelector("#message");
+var h1 = document.querySelector("h1");
 
-colorDisplay.textContent = goalColor;
-colorDisplay.style.color = goalColor;
-
-init();
 startGame();
 
 reset.addEventListener("click",function(){
@@ -62,31 +59,34 @@ hardBtn.addEventListener("click", function(){
 
 function init(){
 	// Intialize
-	numberOfSquares = 6;
+	hardBtn.classList.contains("selected") ? numberOfSquares = 6: numberOfSquares = 3;
 	colors = generateRandomColors(numberOfSquares);
 	goalColor = pickColor();
-	colorDisplay.textContent = goalColor;
-	colorDisplay.style.color = goalColor;
 	reset.textContent = "New Colors";
 	messageDisplay.textContent = "";
+	colorDisplay.textContent = goalColor;
+	colorDisplay.style.color = goalColor;
+	h1.style.backgroundColor = "steelblue";
 }
 
 function startGame(){
+	init();
 	for (var i = 0; i <squares.length; i++){
 		squares[i].style.backgroundColor = colors[i];
 
 		squares[i].addEventListener("click", function(){
 			if(this.style.backgroundColor === goalColor){
-				// display message
-				document.querySelector("#message").textContent = "Correct!";
+				// User selected correct color
+				messageDisplay.textContent = "Correct!";
 				changeColors(goalColor);
-				document.querySelector("h1").style.backgroundColor = goalColor;
+				h1.style.backgroundColor = goalColor;
 				reset.textContent = "Play Again?";
 				colorDisplay.style.color = "white";
 			}
 			else{
+				// User selected wrong color
 				this.style.backgroundColor = "#232323";
-				document.querySelector("#message").textContent = "Try Again!";
+				messageDisplay.textContent = "Try Again!";
 			}
 		});
 	}
