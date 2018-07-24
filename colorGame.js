@@ -1,21 +1,24 @@
-var numberOfSquares = 6;
-var colors = generateRandomColors(numberOfSquares);
+// Variables
+var colors;
+var goalColor;
+var numberOfSquares;
+
+// Selectors
+
 var squares = document.querySelectorAll(".square");
-var goalColor = pickColor();
 var colorDisplay = document.getElementById("colorDisplay");
 var reset = document.querySelector("#reset");
 var easyBtn = document.querySelector("#easyBtn");
 var hardBtn = document.querySelector("#hardBtn");
+var messageDisplay = document.querySelector("#message");
 
 colorDisplay.textContent = goalColor;
 colorDisplay.style.color = goalColor;
 
+init();
 startGame();
 
 reset.addEventListener("click",function(){
-	colors = generateRandomColors(numberOfSquares);
-	goalColor = pickColor();
-
 	startGame();
 });
 
@@ -57,13 +60,18 @@ hardBtn.addEventListener("click", function(){
 
 });
 
-
-function startGame(){
+function init(){
+	// Intialize
+	numberOfSquares = 6;
+	colors = generateRandomColors(numberOfSquares);
+	goalColor = pickColor();
 	colorDisplay.textContent = goalColor;
 	colorDisplay.style.color = goalColor;
 	reset.textContent = "New Colors";
-	document.querySelector("#message").textContent = "";
+	messageDisplay.textContent = "";
+}
 
+function startGame(){
 	for (var i = 0; i <squares.length; i++){
 		squares[i].style.backgroundColor = colors[i];
 
