@@ -4,9 +4,8 @@ var goalColor;
 var numberOfSquares;
 
 // Selectors
-
 var squares = document.querySelectorAll(".square");
-var colorDisplay = document.getElementById("colorDisplay");
+var colorDisplay = document.querySelector("#colorDisplay");
 var reset = document.querySelector("#reset");
 var easyBtn = document.querySelector("#easyBtn");
 var hardBtn = document.querySelector("#hardBtn");
@@ -19,15 +18,17 @@ reset.addEventListener("click",function(){
 	startGame();
 });
 
-
+//Easy button logic
 easyBtn.addEventListener("click", function(){
-	numberOfSquares = 3;
+	// numberOfSquares = 3;
 	this.classList.add("selected");
 	hardBtn.classList.remove("selected");
-	colors = generateRandomColors(numberOfSquares);
-	goalColor = pickColor();
-	colorDisplay.textContent = goalColor;
-	colorDisplay.style.color = goalColor;
+	// colors = generateRandomColors(numberOfSquares);
+	// goalColor = pickColor();
+	// colorDisplay.textContent = goalColor;
+	// colorDisplay.style.color = goalColor;
+
+	startGame();
 
 	for(var i = 0; i < squares.length; i++){
 		if(colors[i]){
@@ -39,16 +40,19 @@ easyBtn.addEventListener("click", function(){
 	}
 });
 
+//Hard button logic
 hardBtn.addEventListener("click", function(){
-	numberOfSquares = 6;
+	// numberOfSquares = 6;
 	this.classList.add("selected");
-	if(easyBtn.classList.contains("selected"))
+	if(easyBtn.classList.  contains("selected"))
 	easyBtn.classList.remove("selected");
+	
+	startGame();
 
-	colors = generateRandomColors(numberOfSquares);
-	goalColor = pickColor();
-	colorDisplay.textContent = goalColor;
-	colorDisplay.style.color = goalColor;
+	// colors = generateRandomColors(numberOfSquares);
+	// goalColor = pickColor();
+	// colorDisplay.textContent = goalColor;
+	// colorDisplay.style.color = goalColor;
 
 	for(var i = 0; i < squares.length; i++){
 		squares[i].style.backgroundColor = colors[i];
@@ -65,7 +69,7 @@ function init(){
 	reset.textContent = "New Colors";
 	messageDisplay.textContent = "";
 	colorDisplay.textContent = goalColor;
-	colorDisplay.style.color = goalColor;
+	hardBtn.classList.contains("selected") ? colorDisplay.style.color = "white": colorDisplay.style.color = goalColor;
 	h1.style.backgroundColor = "steelblue";
 }
 
